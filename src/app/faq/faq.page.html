@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img style="height: 60px;" src="/assets/images/ecopetrol-logo.png" />
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="gotoBack($event)">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item
+      button
+      *ngFor="let item of FAQsCategories"
+      (click)="FAQDetails(item)"
+    >
+      <ion-icon slot="start" name="m"></ion-icon>
+      <ion-label>
+        <h3>Category 1</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

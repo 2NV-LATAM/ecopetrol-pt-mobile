@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img style="height: 60px;" src="/assets/images/ecopetrol-logo.png" />
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="gotoBack($event)">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="refresh" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="app_background">
+    <div class="wrap-spinner" *ngIf="isLoading == true">
+      <ion-spinner color="medium" name="crescent" class="spinner"></ion-spinner>
+    </div>
+    <!-- http://openweathermap.org/img/wn/10d@2x.png -->
+    <ion-text color="secondary">
+      <h1>
+        <ion-icon name="cloud-outline"></ion-icon>
+        <span>21</span>
+        <span>C</span>
+      </h1>
+    </ion-text>
+
+    <div
+      class="content-message"
+      *ngIf="isLoading == false && weather == undefined"
+    >
+      <div class="wrap-message">
+        <div class="first-text">
+          Ups! It wasn't possible to get weather information
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

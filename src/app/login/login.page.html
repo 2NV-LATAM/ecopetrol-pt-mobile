@@ -1,0 +1,27 @@
+<ion-content padding center text-center class="login-content">
+  <div class="float_logo">
+    <img src="/assets/images/ecopetrol-logo-vector.png" alt="ecopetrol-logo" />
+  </div>
+
+  <ion-list [formGroup]="loginForm">
+    <ion-item>
+      <ion-label position="floating"> Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"> Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button
+    color="primary"
+    expand="block"
+    (click)="login($event)"
+    [disabled]="loginForm.invalid"
+  >
+    <ion-spinner *ngIf="loginBtnLoading" name="circles"></ion-spinner>
+    Login
+  </ion-button>
+</ion-content>
