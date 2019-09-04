@@ -34,8 +34,8 @@ export class WeatherService {
    * @param _httpClient
    */
   constructor(
-    private _httpClient: HttpClient,
     private geo: Geolocation,
+    private _httpClient: HttpClient,
     private _environment: EnvironmentService
   ) {
     // Get current location
