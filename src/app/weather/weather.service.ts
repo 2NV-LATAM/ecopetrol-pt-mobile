@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
+import { EnvironmentService } from "../services/environment/environment.service";
 @Injectable({
   providedIn: "root"
 })
@@ -32,7 +33,11 @@ export class WeatherService {
    * @param geo
    * @param _httpClient
    */
-  constructor(private _httpClient: HttpClient, private geo: Geolocation) {
+  constructor(
+    private _httpClient: HttpClient,
+    private geo: Geolocation,
+    private _environment: EnvironmentService
+  ) {
     // Get current location
     this.getCurrentLocation();
 
@@ -52,13 +57,10 @@ export class WeatherService {
    * @param long
    */
   private getWeather(lat: string, long: string): void {
-    let params = new HttpParams()
-      .set("lat", lat)
-      .set("lon", long)
-      .set("appid", this.appId);
+    let params = new HttpParams().set("lat", lat).set("lon", long);
 
     this._httpClient
-      .get(`https://api.openweathermap.org/data/2.5/weather`, {
+      .get(`${this._environment.getHost}/weather/`, {
         params: params
       })
       .subscribe(
@@ -97,7 +99,7 @@ export class WeatherService {
         this.longitude = resp.coords.longitude;
 
         // Ask for the weather
-        //this.getWeather(this.latitude, this.longitude);
+        this.getWeather(this.latitude, this.longitude);
       })
       .catch(error => {
         // onError Callback receives a PositionError object
